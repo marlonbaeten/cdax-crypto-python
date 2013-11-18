@@ -1,0 +1,58 @@
+crypto:
+    rsa:
+        keylength: 1024
+        exponent: 65537
+    hmac:
+        hash: sha1
+    encryption:
+        algo: aes_128_cbc
+server:
+    port: 6000
+network:
+    ip: localhost
+    buffer_size: 1024
+    connections: 10
+topics:
+    topic_0:
+        node: node_0
+    topic_1:
+        node: node_1
+    topic_2:
+        node: node_1
+nodes:
+    node_0:
+        port: 4000
+        topics:
+            - topic_0
+    node_1:
+        port: 4001
+        topics:
+            - topic_1
+            - topic_2
+clients:
+    publisher_0:
+        type: publisher
+        allowed_topics:
+            - topic_0
+            - topic_1
+    publisher_1:
+        type: publisher
+        allowed_topics:
+            - topic_2
+    subscriber_2:
+        type: subscriber
+        port: 5002
+        allowed_topics:
+            - topic_0
+            - topic_2
+    subscriber_3:
+        type: subscriber
+        port: 5003
+        allowed_topics:
+            - topic_1
+            - topic_2
+    subscriber_4:
+        type: subscriber
+        port: 5004
+        allowed_topics:
+            - topic_0
